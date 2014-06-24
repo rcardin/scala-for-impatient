@@ -53,3 +53,24 @@ val m3 = Money(3, 75) - Money(3, 25)
 m3 == Money(0, 50)
 Money(1, 35) < m3
 // Exercise 5
+class Table {
+  // Inverse representation
+  private var table: List[List[String]] = (Nil) :: Nil
+  def |(s: String): Table = {
+    table = (s :: table.head) :: table.tail
+    this
+  }
+  def ||(s: String): Table = {
+    table = (s :: Nil) :: table
+    this
+  }
+  // This is the power of Scala language ;)
+  override def toString: String =
+    "<table>" + table.reverse.foldRight("")("<tr>" + _.reverse.foldLeft("")(_ + "<td>" + _ + "</td>") + "</tr>" + _) + "</table>"
+}
+object Table {
+  def apply() = { new Table }
+}
+
+val t = new Table() | "Java" | "Scala" || "Gosling" | "Odersky" || "JVM" | "JVM, .NET"
+// Exercise 6
