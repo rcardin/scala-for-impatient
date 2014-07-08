@@ -74,3 +74,54 @@ object Table {
 
 val t = new Table() | "Java" | "Scala" || "Gosling" | "Odersky" || "JVM" | "JVM, .NET"
 // Exercise 6
+class ASCIIArt(lines: List[String]) {
+  // TODO
+}
+// Exercise 7
+class BitSequence(bits: Long) {
+  var bitsSeq: Array[Int] = {
+    // Transform long in a string and ciclying over it
+    val bitList = bits.toString.reverse.padTo(64, '0').toArray
+    for (bit <- bitList) yield {
+      bit match {
+        case '0' => 0
+        case '1' => 1
+        case _ => throw new IllegalArgumentException(s"Long value $bits supplied is not a sequence of bits")
+      }   // bit match
+    }   // for (bit <- bitList) yield
+  }   // var bitsSeq: Array[Int]
+
+  def apply(index: Int): Int = bitsSeq(index)
+  def update(index: Int, value: Int) = {
+    if (value != 0 && value != 1)
+      throw new IllegalArgumentException(s"Value $value is not a bit")
+    bitsSeq(index) = value
+  }
+
+  override def toString = bitsSeq.mkString
+}
+val bits = new BitSequence(101101010L)
+bits(1)
+bits(1) = 0
+bits(1)
+// Exercise 8
+// TODO
+// Exercise 9 / 10
+object RichFile {
+// Ex 9
+//  def unapply(path: String) =
+//    if (path == null || path.length == 0 || path.lastIndexOf("/") == -1 || path.lastIndexOf(".") == -1)
+//      None
+//    else
+//      Some((
+//        path.substring(0, path.lastIndexOf("/")),
+//        path.substring(path.lastIndexOf("/") + 1, path.lastIndexOf(".")),
+//        path.substring(path.lastIndexOf(".") + 1)
+//      ))
+// Ex 10
+  def unapplySeq(path: String): Option[Seq[String]] =
+    if (path.lastIndexOf("/") == -1) None
+    else Some(path.split("/"))
+}
+val RichFile(path, name, ext) = "root/user/bash.sh"
+val RichFile(path1, path2, path3, path4) = "root/user/home/bash.sh"
