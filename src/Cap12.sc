@@ -25,3 +25,23 @@ def largest(fun: (Int) => Int, inputs: Seq[Int]) =
   inputs.map(fun(_)).max
 largest(x => 10 * x - x * x, 1 to 10)
 // Exercise 6
+def largestElement(fun: (Int) => Int, inputs: Seq[Int]) =
+  inputs.maxBy(fun(_))
+largestElement(x => 10 * x - x * x, 1 to 10)
+// Exercise 7
+def adjustToPair(fun: (Int, Int) => Int): ((Int, Int)) => Int = {
+  (pair: (Int, Int)) => fun(pair._1, pair._2)
+}
+adjustToPair(_ * _)(6, 7)
+val pairs = (1 to 10) zip (11 to 20)
+pairs.map {
+  case (x, y) => adjustToPair(_ + _)(x, y)
+}.sum
+// Why this?
+pairs.map(adjustToPair(_ + _)).sum
+// Exercise 8
+val a = Array("Hello", "World")
+val b = Array(5, 5)
+a.corresponds(b)(_.length == _)
+// Exercise 9
+// TODO
