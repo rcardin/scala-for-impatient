@@ -1,3 +1,5 @@
+import scala.Boolean
+
 /**
  * Created by Riccardo Cardin on 08/07/2014.
  */
@@ -45,3 +47,10 @@ val b = Array(5, 5)
 a.corresponds(b)(_.length == _)
 // Exercise 9
 // TODO
+// Exercise 10
+def unless(condition: => Boolean)(block: => Unit) {
+  if (!condition) block
+}
+unless (0 == 1) {
+  println("Ok, good.")
+}
