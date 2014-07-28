@@ -41,8 +41,13 @@ def extract(arr: Seq[String], m: Map[String, Int]): Seq[Int] = {
 }
 extract(Array("Tom", "Fred", "Harry"), Map("Tom" -> 3, "Dick" -> 4, "Harry" -> 5))
 // Exercise 5
-//def mkString(a: Array[Int], sep: String): String = {
-//  a.reduceLeft((x1, x2) => x1 + sep + x2)
-//}
-//val a1 = Array(0, 1, 2, 3, 4)
-//mkString(a1, ", ")
+def mkString(a: Array[Int], sep: String): String = {
+  a.map(_.toString).reduceLeft((x1, x2) => x1 + sep + x2)
+}
+val a1 = Array(0, 1, 2, 3, 4)
+mkString(a1, ", ")
+// Exercise 6
+val lst = List(1, 2, 3, 4, 5)
+(lst :\ List[Int]())((xs, x) => x :+ xs)
+(List[Int]() /: lst)((xs, x) => x :: xs)
+// Exercise 7
