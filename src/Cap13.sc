@@ -51,3 +51,13 @@ val lst = List(1, 2, 3, 4, 5)
 (lst :\ List[Int]())((xs, x) => x :+ xs)
 (List[Int]() /: lst)((xs, x) => x :: xs)
 // Exercise 7
+val prices = List(5.0, 20.0, 9.95)
+val quantities = List(10, 2, 1)
+(prices zip quantities) map Function.tupled(_ * _)
+// Exercise 8
+val a2: Array[Double] = Array[Double](1, 2, 3, 4, 5, 6)
+def toMatrix(arr: Array[Double], length: Int): Array[Array[Double]] = {
+  arr.grouped(length).toArray
+}
+toMatrix(a2, 3).deep.mkString(", ")
+// Exercise 10
